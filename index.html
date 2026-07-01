@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dishant Mote Professional Photography Portfolio</title>
 <style>
-/* Google Fonts - लिंक पूरी तरह सही है */
+/* Google Fonts */
 @import url('https://googleapis.com');
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -61,6 +61,7 @@ min-height: calc(100vh - 80px);
 width: 100%;
 position: relative;
 flex-wrap: wrap;
+transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.6s ease;
 }
 .hero-image-side {
 width: 50%;
@@ -166,7 +167,12 @@ animation: spinLiquid 4s linear infinite;
 }
 
 /* Portfolio Gallery Section */
-.container { max-width: 1200px; margin: 0 auto; padding: 80px 20px; }
+.container { 
+max-width: 1200px; 
+margin: 0 auto; 
+padding: 80px 20px;
+transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.6s ease;
+}
 .section-title { font-family: 'Playfair Display', serif; text-align: center; font-size: 2.5rem; font-weight: 700; margin-bottom: 60px; position: relative; }
 .section-title::after { content: ''; width: 40px; height: 3px; background: #e5a93b; position: absolute; bottom: -15px; left: 50%; transform: translateX(-50%); }
 
@@ -175,12 +181,54 @@ animation: spinLiquid 4s linear infinite;
 .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
 .gallery-item:hover img { transform: scale(1.03); }
 
+/* सर्विसेज सेक्शन */
+.services-section {
+background-color: #ffffff;
+padding: 80px 20px;
+transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.6s ease;
+}
+.services-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+gap: 25px;
+max-width: 1200px;
+margin: 0 auto;
+}
+.service-card {
+background: #fbfbfb;
+border: 1px solid #f0f0f0;
+padding: 40px 30px;
+border-radius: 12px;
+text-align: center;
+transition: all 0.4s ease;
+}
+.service-card:hover {
+transform: translateY(-5px);
+background: #ffffff;
+border-color: #e5a93b;
+box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+}
+.service-icon {
+font-size: 2.5rem;
+color: #e5a93b;
+margin-bottom: 15px;
+}
+.service-card h3 {
+font-family: 'Montserrat', sans-serif;
+font-size: 16px;
+font-weight: 700;
+letter-spacing: 1px;
+text-transform: uppercase;
+color: #111;
+}
+
 /* कॉन्टैक्ट सेक्शन */
 .contact-section {
 background-color: #fbfbfb;
 border-top: 1px solid #f0f0f0;
 padding: 100px 20px;
 text-align: center;
+transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.6s ease;
 }
 .contact-container {
 max-width: 600px;
@@ -219,6 +267,45 @@ transition: 0.3s;
 color: #000;
 }
 
+/* सुधरा हुआ प्रीमियम बुक स्लाइड एनिमेशन */
+.flip-right-anim {
+  animation: slideFromRight 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+@keyframes slideFromRight {
+  0% { transform: scale(0.95); opacity: 0; filter: blur(4px); }
+  100% { transform: scale(1); opacity: 1; filter: blur(0); }
+}
+
+.flip-left-anim {
+  animation: slideFromLeft 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+@keyframes slideFromLeft {
+  0% { transform: scale(0.95); opacity: 0; filter: blur(4px); }
+  100% { transform: scale(1); opacity: 1; filter: blur(0); }
+}
+
+/* Contacts Section - Premium WhatsApp Link Button */
+.wa-contact-btn {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 14px 30px;
+  background-color: #25d366;
+  color: #fff !important;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.2);
+}
+.wa-contact-btn:hover {
+  background-color: #1ebd58;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+}
+
 /* Lightbox popup */
 .lightbox { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.98); z-index: 1000; justify-content: center; align-items: center; }
 .lightbox img { max-width: 90%; max-height: 85%; object-fit: contain; border-radius: 4px; box-shadow: 0 30px 70px rgba(0,0,0,0.1); }
@@ -238,67 +325,8 @@ nav a { margin: 0 10px; }
 .contact-item strong { width: 100%; margin-bottom: 5px; }
 .contact-details { text-align: center; }
 }
-  /* WhatsApp Floating Button Style */
-.whatsapp-float {
-position: fixed;
-bottom: 30px;
-right: 30px;
-background-color: #25d366;
-color: #fff;
-border-radius: 50px;
-text-align: center;
-font-size: 30px;
-box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-z-index: 1000;
-width: 60px;
-height: 60px;
-display: flex;
-align-items: center;
-justify-content: center;
-text-decoration: none;
-transition: all 0.3s ease;
-}
-/* सुधरा हुआ प्रीमियम बुक स्लाइड एनिमेशन */
-.flip-right-anim {
-  animation: slideFromRight 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-}
-@keyframes slideFromRight {
-  0% { transform: translateY(40px); opacity: 0; filter: blur(4px); }
-  100% { transform: translateY(0); opacity: 1; filter: blur(0); }
-}
-
-.flip-left-anim {
-  animation: slideFromLeft 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-}
-@keyframes slideFromLeft {
-  0% { transform: translateY(-40px); opacity: 0; filter: blur(4px); }
-  100% { transform: translateY(0); opacity: 1; filter: blur(0); }
-}
-
-/* Contacts Section - Premium WhatsApp Link Button */
-.wa-contact-btn {
-  display: inline-block;
-  margin-top: 15px;
-  padding: 12px 25px;
-  background-color: #25d366;
-  color: #fff !important;
-  text-decoration: none;
-  font-weight: 700;
-  font-size: 13px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  border-radius: 4px;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.2);
-}
-.wa-contact-btn:hover {
-  background-color: #1ebd58;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
-}
 </style>
-</head>
-<body>
+</head><body>
 
 <header>
 <div class="logo">DISHANT MOTE</div>
@@ -310,7 +338,7 @@ transition: all 0.3s ease;
 </nav>
 </header>
 
-<!-- Hero Section (मुख्य फोटो) -->
+<!-- Hero Section -->
 <section id="home" class="hero-section">
 <div class="hero-image-side">
 <img src="dishant.jpg" alt="Dishant Mote Photography">
@@ -327,7 +355,7 @@ transition: all 0.3s ease;
 </div>
 </section>
 
-<!-- Portfolio Section (गैलरी की 3 फोटो) -->
+<!-- Portfolio Section -->
 <div class="container" id="portfolio">
 <h2 class="section-title">Portfolio</h2>
 <div class="gallery-grid">
@@ -336,23 +364,45 @@ transition: all 0.3s ease;
 <div class="gallery-item" onclick="openLightbox(this)"><img src="3.jpg" alt="Portfolio 3"></div>
 <div class="gallery-item" onclick="openLightbox(this)"><img src="4.jpg" alt="Portfolio 4"></div>
 <div class="gallery-item" onclick="openLightbox(this)"><img src="5.jpg" alt="Portfolio 5"></div>
-<div class="gallery-item" onclick="openLightbox(this)"><img src="6.jpg" alt="Portfolio 6"></div>
 </div>
 </div>
+
 <!-- My Services Section -->
-<section id="services" class="services-section" style="background-color: #ffffff; padding: 80px 20px;">
-<h2 class="section-title" style="font-family: 'Playfair Display', serif; text-align: center; font-size: 2.5rem; font-weight: 700; margin-bottom: 60px; position: relative;">My Services</h2>
-<div class="services-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; max-width: 1200px; margin: 0 auto;">
-<div class="service-card" style="background: #fbfbfb; border: 1px solid #f0f0f0; padding: 40px 30px; border-radius: 12px; text-align: center;"><div style="font-size: 2.5rem; color: #e5a93b; margin-bottom: 15px;">📷</div><h3 style="font-size: 16px; font-weight: 700; text-transform: uppercase;">Photography</h3></div>
-<div class="service-card" style="background: #fbfbfb; border: 1px solid #f0f0f0; padding: 40px 30px; border-radius: 12px; text-align: center;"><div style="font-size: 2.5rem; color: #e5a93b; margin-bottom: 15px;">📹</div><h3 style="font-size: 16px; font-weight: 700; text-transform: uppercase;">Videography</h3></div>
-<div class="service-card" style="background: #fbfbfb; border: 1px solid #f0f0f0; padding: 40px 30px; border-radius: 12px; text-align: center;"><div style="font-size: 2.5rem; color: #e5a93b; margin-bottom: 15px;">🎬</div><h3 style="font-size: 16px; font-weight: 700; text-transform: uppercase;">Cinematic Reels</h3></div>
-<div class="service-card" style="background: #fbfbfb; border: 1px solid #f0f0f0; padding: 40px 30px; border-radius: 12px; text-align: center;"><div style="font-size: 2.5rem; color: #e5a93b; margin-bottom: 15px;">✨</div><h3 style="font-size: 16px; font-weight: 700; text-transform: uppercase;">Candid Shoot</h3></div>
-<div class="service-card" style="background: #fbfbfb; border: 1px solid #f0f0f0; padding: 40px 30px; border-radius: 12px; text-align: center;"><div style="font-size: 2.5rem; color: #e5a93b; margin-bottom: 15px;">🧸</div><h3 style="font-size: 16px; font-weight: 700; text-transform: uppercase;">Baby Shoot</h3></div>
-<div class="service-card" style="background: #fbfbfb; border: 1px solid #f0f0f0; padding: 40px 30px; border-radius: 12px; text-align: center;"><div style="font-size: 2.5rem; color: #e5a93b; margin-bottom: 15px;">🤰</div><h3 style="font-size: 16px; font-weight: 700; text-transform: uppercase;">Maternity Shoot</h3></div>
-<div class="service-card" style="background: #fbfbfb; border: 1px solid #f0f0f0; padding: 40px 30px; border-radius: 12px; text-align: center;"><div style="font-size: 2.5rem; color: #e5a93b; margin-bottom: 15px;">💍</div><h3 style="font-size: 16px; font-weight: 700; text-transform: uppercase;">Pre-Wedding</h3></div>
+<section id="services" class="services-section">
+<h2 class="section-title">My Services</h2>
+<div class="services-grid">
+<div class="service-card">
+<div class="service-icon">📷</div>
+<h3>Photography</h3>
+</div>
+<div class="service-card">
+<div class="service-icon">📹</div>
+<h3>Videography</h3>
+</div>
+<div class="service-card">
+<div class="service-icon">🎬</div>
+<h3>Cinematic Reels</h3>
+</div>
+<div class="service-card">
+<div class="service-icon">✨</div>
+<h3>Candid Shoot</h3>
+</div>
+<div class="service-card">
+<div class="service-icon">🧸</div>
+<h3>Baby Shoot</h3>
+</div>
+<div class="service-card">
+<div class="service-icon">🤰</div>
+<h3>Maternity Shoot</h3>
+</div>
+<div class="service-card">
+<div class="service-icon">💍</div>
+<h3>Pre-Wedding</h3>
+</div>
 </div>
 </section>
-<!-- कॉन्टैक्ट सेक्शन (इसमें डायरेक्ट व्हाट्सएप चैट का बटन जोड़ दिया है) -->
+
+<!-- Contact Me Section -->
 <section id="contact" class="contact-section">
 <h2 class="section-title">Contact Me</h2>
 <div class="contact-container">
@@ -368,8 +418,9 @@ transition: all 0.3s ease;
 </div>
 <div class="contact-item">
 <strong>Email:</strong> <a href="mailto:motedishant93@gmail.com">motedishant93@gmail.com</a>
+</div>
 <div style="text-align: center; margin-top: 25px;">
-  <a href="https://whatsapp.com!" class="wa-contact-btn" target="_blank" style="display: inline-block; padding: 14px 30px; background-color: #25d366; color: #fff; font-weight: bold; text-decoration: none; border-radius: 6px; text-transform: uppercase; letter-spacing: 1px;">Chat On WhatsApp</a>
+  <a href="https://whatsapp.com!" class="wa-contact-btn" target="_blank">Chat On WhatsApp</a>
 </div>
 </div>
 </div>
@@ -382,9 +433,7 @@ transition: all 0.3s ease;
 
 <footer>
 <p>© 2026 Dishant Mote Photography Studio. All Rights Reserved.</p>
-</footer>
-
-<script>
+</footer><script>
 // Lightbox Functions
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightbox-img');
@@ -395,7 +444,7 @@ function closeLightbox() { lightbox.style.display = 'none'; }
 const sectionSequence = ['#home', '#portfolio', '#services', '#contact'];
 let activeSectionId = '#home';
 
-// Book Style Left/Right Page Flip Logic ONLY on Menu Clicks
+// Perfect Slide Scroll Logic ONLY on Menu Clicks
 document.querySelectorAll('nav a, .liquid-btn').forEach(anchor => {
 anchor.addEventListener('click', function(e) {
 e.preventDefault();
@@ -410,18 +459,17 @@ if (targetSection) {
   const currentIndex = sectionSequence.indexOf(activeSectionId);
   const targetIndex = sectionSequence.indexOf(targetId);
 
-  // एनिमेशन क्लास साफ़ करें
+  // एनीमेशन क्लासेस को साफ़ करें
   targetSection.classList.remove('flip-right-anim', 'flip-left-anim');
-  void targetSection.offsetWidth; // ब्राउज़र रिफ्रेश ट्रिक
+  void targetSection.offsetWidth; // रिफ्रेश ट्रिक
 
-  // तय करें: आगे जाने पर Right Flip (बाएँ से दाएँ), पीछे आने पर Left Flip (दाएँ से बाएँ)
+  // दिशा तय करें
   if (targetIndex > currentIndex) {
     targetSection.classList.add('flip-right-anim');
   } else {
     targetSection.classList.add('flip-left-anim');
   }
 
-  // पेज को स्मूथली उस सेक्शन पर लेकर जाएँ
   targetSection.scrollIntoView({ behavior: 'smooth' });
   activeSectionId = targetId;
 }
