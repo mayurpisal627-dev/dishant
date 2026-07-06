@@ -282,6 +282,7 @@ nav a:hover, nav a.active {
   letter-spacing: 1px;
   text-transform: uppercase;
   display: inline-block;
+  font-family: 'Montserrat', sans-serif;
   transition: all 0.3s ease;
   box-shadow: 0 6px 15px rgba(37,211,102,0.2);
   -webkit-tap-highlight-color: transparent;
@@ -454,10 +455,10 @@ footer {
 <div class="contact-item"><strong>Contact:</strong> <a href="tel:+919309405055">+91 9309405055</a></div>
 <div class="contact-item"><strong>Email:</strong> <a href="mailto:motedishant93@gmail.com">motedishant93@gmail.com</a></div>
 <div class="whatsapp-container">
-<!-- FIXED LINK: Perfect international link architecture -->
-<a href="https://wa.me" target="_blank" class="whatsapp-btn-item">
+<!-- CLICK TRRIGERS DYNAMIC SCRIPT LOGIC TO PREVENT BLOCKING -->
+<button onclick="redirectToWhatsApp()" class="whatsapp-btn-item" style="border:none; cursor:pointer;">
 WhatsApp Par Chat Karein 💬
-</a>
+</button>
 </div>
 </div>
 </div>
@@ -485,6 +486,16 @@ function closeLightbox() {
   lightboxImg.src = '';
   document.body.style.overflow = 'auto'; 
 }
+
+// SAFE CURRENT TAB FORCED LOCATION UPDATER
+function redirectToWhatsApp() {
+  const num = "919309405055";
+  const txt = encodeURIComponent("Hello Dishant, I saw your portfolio and want to book a shoot!");
+  
+  // Directly opens inside same window context to bypass popups restriction
+  window.location.href = `https://wa.me{num}?text=${txt}`;
+}
+
 window.addEventListener('scroll', () => {
   const sections = document.querySelectorAll('section, div.container, #contact');
   const navLinks = document.querySelectorAll('nav a');
