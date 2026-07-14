@@ -1,20 +1,25 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
 <title>Dishant Mote Portfolio</title>
+
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Playfair+Display:wght@400;700&display=swap');
+@import url('https://googleapis.com');
+
 * {
 box-sizing: border-box;
 margin: 0;
 padding: 0;
 }
+
 html {
 scroll-behavior: smooth;
 height: -webkit-fill-available;
 }
+
 body {
 background-color: #ffffff;
 color: #1c1c1c;
@@ -23,6 +28,82 @@ overflow-x: hidden;
 position: relative;
 min-height: 100vh;
 }
+
+/* REALISTIC CINEMATIC GATE INTRO SPLASH SCREEN */
+.gate-intro-container {
+position: fixed;
+top: 0;
+left: 0;
+width: 100vw;
+height: 100vh;
+z-index: 99999;
+display: flex;
+overflow: hidden;
+pointer-events: none;
+perspective: 1200px;
+}
+
+.gate-panel {
+width: 50.5%;
+height: 100%;
+background: linear-gradient(135deg, #0a0a0a 0%, #161616 100%);
+position: absolute;
+top: 0;
+pointer-events: auto;
+box-shadow: 0 0 100px rgba(0, 0, 0, 0.8);
+transition: transform 1.6s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.gate-left {
+left: 0;
+transform-origin: left center;
+border-right: 1px solid rgba(229, 169, 59, 0.15);
+}
+
+.gate-right {
+right: 0;
+transform-origin: right center;
+border-left: 1px solid rgba(229, 169, 59, 0.15);
+}
+
+.gate-intro-container.open .gate-left {
+transform: translateX(-100%) rotateY(-15deg);
+}
+
+.gate-intro-container.open .gate-right {
+transform: translateX(100%) rotateY(15deg);
+}
+
+/* Flying Camera Element inside intro screen */
+.intro-camera-wrapper {
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+z-index: 100000;
+width: 220px;
+height: 220px;
+display: flex;
+justify-content: center;
+align-items: center;
+pointer-events: none;
+transition: all 1.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.intro-camera-wrapper img {
+width: 100%;
+height: 100%;
+object-fit: contain;
+filter: drop-shadow(0 15px 35px rgba(229, 169, 59, 0.3));
+animation: cameraPulse 2.5s infinite ease-in-out;
+transition: all 1.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+@keyframes cameraPulse {
+0%, 100% { transform: scale(1); filter: drop-shadow(0 15px 35px rgba(229, 169, 59, 0.2)); }
+50% { transform: scale(1.04); filter: drop-shadow(0 20px 45px rgba(229, 169, 59, 0.45)); }
+}
+
 header {
 background: rgba(255,255,255,0.95);
 backdrop-filter: blur(10px);
@@ -36,13 +117,26 @@ justify-content: space-between;
 align-items: center;
 border-bottom: 1px solid #f0f0f0;
 }
+
 header .logo {
 font-weight: 700;
 font-size: 1.1rem;
 letter-spacing: 3px;
 text-transform: uppercase;
 color: #000;
+display: flex;
+align-items: center;
+gap: 15px;
 }
+
+.logo-camera-target {
+width: 40px;
+height: 40px;
+display: inline-block;
+position: relative;
+vertical-align: middle;
+}
+
 nav a {
 color: #666;
 text-decoration: none;
@@ -53,9 +147,12 @@ letter-spacing: 1px;
 text-transform: uppercase;
 transition: 0.3s;
 }
-nav a:hover, nav a.active {
+
+nav a:hover,
+nav a.active {
 color: #e5a93b;
 }
+
 .hero-section {
 display: flex;
 align-items: center;
@@ -64,6 +161,7 @@ width: 100%;
 position: relative;
 flex-wrap: wrap;
 }
+
 .hero-image-side {
 width: 50%;
 height: 100%;
@@ -72,6 +170,7 @@ top: 0;
 left: 0;
 overflow: hidden;
 }
+
 .hero-image-side img {
 width: 100%;
 height: 100%;
@@ -79,12 +178,14 @@ object-fit: cover;
 mask-image: linear-gradient(to right, rgba(0,0,0,1) 75%, rgba(0,0,0,0) 100%);
 -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,1) 75%, rgba(0,0,0,0) 100%);
 }
+
 .hero-text-side {
 width: 48%;
 margin-left: 52%;
 padding: 40px;
 z-index: 5;
 }
+
 .hero-text-side .sub-tag {
 font-size: 11px;
 font-weight: 700;
@@ -93,6 +194,7 @@ color: #e5a93b;
 text-transform: uppercase;
 margin-bottom: 12px;
 }
+
 .hero-text-side h1 {
 font-family: 'Playfair Display', serif;
 font-size: 2.8rem;
@@ -100,36 +202,15 @@ font-weight: 700;
 line-height: 1.2;
 color: #111;
 margin-bottom: 20px;
-display: flex;
-align-items: center;
-gap: 15px;
-flex-wrap: wrap;
-}
-.hero-camera-img {
-width: 80px;
-height: 80px;
-object-fit: contain;
-opacity: 0;
-animation: cameraSweepUp 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-animation-delay: 0.5s;
 }
 
-@keyframes cameraSweepUp {
-0% {
-opacity: 0;
-transform: translateY(100px) scale(0.5);
-}
-100% {
-opacity: 1;
-transform: translateY(0) scale(1);
-}
-}
 .hero-text-side h1 span {
 font-family: 'Playfair Display', serif;
 font-weight: 400;
 font-style: italic;
 color: #666;
 }
+
 .hero-text-side p {
 font-size: 14px;
 line-height: 1.7;
@@ -137,6 +218,7 @@ color: #666;
 max-width: 420px;
 margin-bottom: 30px;
 }
+
 .liquid-container {
 position: relative;
 display: inline-block;
@@ -149,11 +231,13 @@ transition: all 0.4s ease;
 z-index: 1;
 transform: translateY(0);
 }
+
 .liquid-container:hover {
 transform: translateY(-3px);
 box-shadow: 0 10px 25px rgba(229,169,59,0.4);
 border-color: #000;
 }
+
 .liquid-btn {
 position: relative;
 padding: 15px 35px;
@@ -168,6 +252,7 @@ letter-spacing: 2px;
 text-transform: uppercase;
 z-index: 5;
 }
+
 .liquid-bg {
 position: absolute;
 top: -40%;
@@ -179,15 +264,21 @@ border-radius: 42%;
 z-index: 2;
 animation: spinLiquid 5s linear infinite;
 }
+
 @keyframes spinLiquid {
 0% { transform: rotate(0deg); }
 100% { transform: rotate(360deg); }
 }
+</style>
+</head>
+
+<style>
 .container {
 max-width: 1100px;
 margin: 0 auto;
 padding: 60px 15px;
 }
+
 .section-title {
 font-family: 'Playfair Display', serif;
 text-align: center;
@@ -196,6 +287,7 @@ font-weight: 700;
 margin-bottom: 45px;
 position: relative;
 }
+
 .section-title::after {
 content: '';
 width: 35px;
@@ -206,11 +298,13 @@ bottom: -12px;
 left: 50%;
 transform: translateX(-50%);
 }
+
 .gallery-grid {
 display: grid;
 grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
 gap: 25px;
 }
+
 .gallery-item {
 position: relative;
 overflow: hidden;
@@ -220,29 +314,65 @@ cursor: pointer;
 height: 400px;
 transition: 0.5s;
 }
+
 .gallery-item img {
 width: 100%;
 height: 100%;
 object-fit: cover;
 transition: 0.6s cubic-bezier(0.16,1,0.3,1);
 }
+
 .gallery-item:hover img {
 transform: scale(1.03);
 }
+
+.services-section {
+background-color: #ffffff;
+padding: 60px 15px;
+}
+
+.services-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+gap: 20px;
+max-width: 1100px;
+margin: 0 auto;
+}
+
 .services-section .service-card {
+background: #fbfbfb;
+border: 1px solid #f0f0f0;
+padding: 35px 25px;
+border-radius: 12px;
+text-align: center;
 transition: all 0.3s ease;
 }
+
 .services-section .service-card:hover {
 transform: translateY(-5px);
 box-shadow: 0 10px 25px rgba(0,0,0,0.05);
 border-color: #e5a93b !important;
 }
+
+.services-section .service-card div {
+font-size: 2.2rem;
+color: #e5a93b;
+margin-bottom: 12px;
+}
+
+.services-section .service-card h3 {
+font-size: 15px;
+font-weight: 700;
+text-transform: uppercase;
+}
+
 .contact-section {
 background-color: #fbfbfb;
 border-top: 1px solid #f0f0f0;
 padding: 80px 15px;
 text-align: center;
 }
+
 .contact-container {
 max-width: 550px;
 margin: 0 auto;
@@ -252,6 +382,7 @@ border-radius: 12px;
 box-shadow: 0 8px 30px rgba(0,0,0,0.02);
 border: 1px solid #f0f0f0;
 }
+
 .contact-details {
 margin-top: 20px;
 text-align: left;
@@ -259,6 +390,7 @@ display: inline-block;
 width: 100%;
 max-width: 400px;
 }
+
 .contact-item {
 margin-bottom: 15px;
 font-size: 14px;
@@ -268,6 +400,7 @@ display: flex;
 align-items: center;
 flex-wrap: wrap;
 }
+
 .contact-item strong {
 color: #111;
 text-transform: uppercase;
@@ -275,15 +408,18 @@ font-size: 11px;
 display: inline-block;
 width: 110px;
 }
+
 .contact-item a {
 color: #e5a93b;
 text-decoration: none;
 font-weight: 600;
 transition: 0.3s;
 }
+
 .contact-item a:hover {
 color: #000;
 }
+
 .lightbox {
 display: none;
 position: fixed;
@@ -296,6 +432,7 @@ z-index: 1000;
 justify-content: center;
 align-items: center;
 }
+
 .lightbox img {
 max-width: 90%;
 max-height: 80%;
@@ -303,6 +440,7 @@ object-fit: contain;
 border-radius: 4px;
 box-shadow: 0 25px 60px rgba(0,0,0,0.08);
 }
+
 .close-box {
 position: absolute;
 top: 30px;
@@ -314,10 +452,12 @@ font-weight: 100;
 transition: 0.3s;
 line-height: 1;
 }
+
 .close-box:hover {
 color: #e5a93b;
 transform: rotate(90deg);
 }
+
 footer {
 text-align: center;
 padding: 30px;
@@ -327,75 +467,46 @@ letter-spacing: 1.5px;
 color: #888;
 border-top: 1px solid #f0f0f0;
 }
+
 @media (max-width: 768px) {
-header {
-padding: 15px;
-flex-direction: column;
-gap: 12px;
-}
-nav a {
-margin: 0 8px;
-font-size: 9px;
-}
-.hero-section {
-min-height: auto;
-}
-.hero-image-side {
-position: relative;
-width: 100%;
-height: 320px;
-}
+header { padding: 15px; flex-direction: column; gap: 12px; }
+header .logo { flex-direction: row; justify-content: center; }
+nav a { margin: 0 8px; font-size: 9px; }
+.hero-section { min-height: auto; }
+.hero-image-side { position: relative; width: 100%; height: 320px; }
 .hero-image-side img {
 mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 75%, rgba(0,0,0,0) 100%);
 -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 75%, rgba(0,0,0,0) 100%);
 }
-.hero-text-side {
-width: 100%;
-margin-left: 0;
-padding: 30px 15px;
-text-align: center;
-}
-.hero-text-side h1 {
-font-size: 2.1rem;
-flex-direction: column;
-}
-.hero-camera-img {
-width: 60px;
-height: 60px;
-}
-.hero-text-side p {
-margin: 0 auto 25px auto;
-}
-.gallery-grid {
-grid-template-columns: 1fr;
-}
-.gallery-item {
-height: 320px;
-}
-.contact-item {
-flex-direction: column;
-text-align: center;
-gap: 3px;
-}
-.contact-item strong {
-width: 100%;
-}
-.contact-details {
-text-align: center;
-margin-top: 15px;
-}
-.close-box {
-top: 15px;
-right: 20px;
-font-size: 32px;
-}
+.hero-text-side { width: 100%; margin-left: 0; padding: 30px 15px; text-align: center; }
+.hero-text-side h1 { font-size: 2.1rem; }
+.hero-text-side p { margin: 0 auto 25px auto; }
+.gallery-grid { grid-template-columns: 1fr; }
+.gallery-item { height: 320px; }
+.services-grid { grid-template-columns: 1fr; }
+.contact-item { flex-direction: column; text-align: center; gap: 3px; }
+.contact-item strong { width: 100%; }
+.contact-details { text-align: center; margin-top: 15px; }
+.close-box { top: 15px; right: 20px; font-size: 32px; }
 }
 </style>
 </head>
+
 <body>
 
+<div class="gate-intro-container" id="gateIntro">
+<div class="gate-panel gate-left"></div>
+<div class="gate-panel gate-right"></div>
+<div class="intro-camera-wrapper" id="flyingCamera">
+<img src="camera.jpg" alt="Camera Gate Sensor">
+</div>
+</div>
+
 <header>
-<div class="logo">DISHANT MOTE</div>
+<div class="logo">
+<div class="logo-camera-target" id="cameraTarget"></div>
+DISHANT MOTE
+</div>
 <nav>
 <a href="#home" class="active">Home</a>
 <a href="#portfolio">Portfolio</a>
@@ -410,10 +521,7 @@ font-size: 32px;
 </div>
 <div class="hero-text-side">
 <p class="sub-tag">I'm Dishant Mote</p>
-<h1>
-<img src="camera.jpg" alt="Camera" class="hero-camera-img">
-Photographer<br><span>& Visual Artist</span>
-</h1>
+<h1>Photographer<br><span>& Visual Artist</span></h1>
 <p>Based in India, I specialize in professional portraits, high-end commercial editorial layouts, and outdoor lifestyle photography campaigns.</p>
 <div class="liquid-container">
 <div class="liquid-bg"></div>
@@ -434,16 +542,16 @@ Photographer<br><span>& Visual Artist</span>
 </div>
 </div>
 
-<section id="services" class="services-section" style="background-color: #ffffff; padding: 60px 15px;">
-<h2 class="section-title" style="font-family: 'Playfair Display', serif; text-align: center; font-size: 2.2rem; font-weight: 700; margin-bottom: 45px; position: relative;">My Services</h2>
-<div class="services-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 20px; max-width: 1100px; margin: 0 auto;">
-<div class="service-card" style="background: #fbfbfb; border: 1px solid #f0f0f0; padding: 35px 25px; border-radius: 12px; text-align: center;"><div style="font-size: 2.2rem; color: #e5a93b; margin-bottom: 12px;">📷</div><h3 style="font-size: 15px; font-weight: 700; text-transform: uppercase;">Photography</h3></div>
-<div class="service-card" style="background: #fbfbfb; border: 1px solid #f0f0f0; padding: 35px 25px; border-radius: 12px; text-align: center;"><div style="font-size: 2.2rem; color: #e5a93b; margin-bottom: 12px;">📹</div><h3 style="font-size: 16px; font-weight: 700; text-transform: uppercase;">Videography</h3></div>
-<div class="service-card" style="background: #fbfbfb; border: 1px solid #f0f0f0; padding: 35px 25px; border-radius: 12px; text-align: center;"><div style="font-size: 2.2rem; color: #e5a93b; margin-bottom: 12px;">🎬</div><h3 style="font-size: 15px; font-weight: 700; text-transform: uppercase;">Cinematic Reels</h3></div>
-<div class="service-card" style="background: #fbfbfb; border: 1px solid #f0f0f0; padding: 35px 25px; border-radius: 12px; text-align: center;"><div style="font-size: 2.2rem; color: #e5a93b; margin-bottom: 12px;">✨</div><h3 style="font-size: 15px; font-weight: 700; text-transform: uppercase;">Candid Shoot</h3></div>
-<div class="service-card" style="background: #fbfbfb; border: 1px solid #f0f0f0; padding: 35px 25px; border-radius: 12px; text-align: center;"><div style="font-size: 2.2rem; color: #e5a93b; margin-bottom: 12px;">🧸</div><h3 style="font-size: 15px; font-weight: 700; text-transform: uppercase;">Baby Shoot</h3></div>
-<div class="service-card" style="background: #fbfbfb; border: 1px solid #f0f0f0; padding: 35px 25px; border-radius: 12px; text-align: center;"><div style="font-size: 2.2rem; color: #e5a93b; margin-bottom: 12px;">🤰</div><h3 style="font-size: 15px; font-weight: 700; text-transform: uppercase;">Maternity Shoot</h3></div>
-<div class="service-card" style="background: #fbfbfb; border: 1px solid #f0f0f0; padding: 35px 25px; border-radius: 12px; text-align: center;"><div style="font-size: 2.2rem; color: #e5a93b; margin-bottom: 12px;">💍</div><h3 style="font-size: 15px; font-weight: 700; text-transform: uppercase;">Pre-Wedding</h3></div>
+<section id="services" class="services-section">
+<h2 class="section-title">My Services</h2>
+<div class="services-grid">
+<div class="service-card"><div>📷</div><h3>Photography</h3></div>
+<div class="service-card"><div>📹</div><h3>Videography</h3></div>
+<div class="service-card"><div>🎬</div><h3>Cinematic Reels</h3></div>
+<div class="service-card"><div>✨</div><h3>Candid Shoot</h3></div>
+<div class="service-card"><div>🧸</div><h3>Baby Shoot</h3></div>
+<div class="service-card"><div>🤰</div><h3>Maternity Shoot</h3></div>
+<div class="service-card"><div>💍</div><h3>Pre-Wedding</h3></div>
 </div>
 </section>
 
@@ -452,9 +560,9 @@ Photographer<br><span>& Visual Artist</span>
 <div class="contact-container">
 <div class="contact-details">
 <div class="contact-item"><strong>Name:</strong> Dishant Mote</div>
-<div class="contact-item"><strong>Instagram:</strong> <a href="https://instagram.com" target="_blank">@dishant_mote_photography</a></div>
-<div class="contact-item"><strong>Contact:</strong> <a href="tel:+919309405055">+91 9309405055</a></div>
-<div class="contact-item"><strong>Email:</strong> <a href="mailto:motedishant93@gmail.com">motedishant93@gmail.com</a></div>
+<div class="contact-item"><strong>Instagram:</strong><a href="https://instagram.com" target="_blank">@dishant_mote_photography</a></div>
+<div class="contact-item"><strong>Contact:</strong><a href="tel:+919309405055">+91 9309405055</a></div>
+<div class="contact-item"><strong>Email:</strong><a href="mailto:motedishant93@gmail.com">motedishant93@gmail.com</a></div>
 </div>
 </div>
 </section>
@@ -464,9 +572,7 @@ Photographer<br><span>& Visual Artist</span>
 <img id="lightbox-img" src="" alt="Popup Frame">
 </div>
 
-<footer>
-<p>© 2026 Dishant Mote Photography Studio. All Rights Reserved.</p>
-</footer>
+<footer><p>© 2026 Dishant Mote Photography Studio. All Rights Reserved.</p></footer>
 
 <script>
 const lightbox = document.getElementById('lightbox');
@@ -484,21 +590,44 @@ lightboxImg.src = '';
 document.body.style.overflow = 'auto';
 }
 
+window.addEventListener('DOMContentLoaded', () => {
+document.body.style.overflow = 'hidden';
+setTimeout(() => {
+const introContainer = document.getElementById('gateIntro');
+const flyingCamera = document.getElementById('flyingCamera');
+const target = document.getElementById('cameraTarget');
+introContainer.classList.add('open');
+const targetRect = target.getBoundingClientRect();
+flyingCamera.querySelector('img').style.animation = 'none';
+
+flyingCamera.style.top = ${targetRect.top + (targetRect.height / 2)}px; flyingCamera.style.left = ``${targetRect.left + (targetRect.width / 2)}px;
+flyingCamera.style.transform = 'translate(-50%, -50%) scale(0.18)';
+flyingCamera.style.filter = 'drop-shadow(0 2px 5px rgba(0,0,0,0.15))';
+
+setTimeout(() => {
+const finalImg = flyingCamera.querySelector('img');
+finalImg.style.width = '100%';
+finalImg.style.height = '100%';
+finalImg.style.objectFit = 'contain';
+target.appendChild(finalImg);
+introContainer.remove();
+flyingCamera.remove();
+document.body.style.overflow = 'auto';
+}, 1400);
+}, 1200);
+});
+
 window.addEventListener('scroll', () => {
 const sections = document.querySelectorAll('section, div.container, #contact');
 const navLinks = document.querySelectorAll('nav a');
 let current = '';
 sections.forEach(section => {
 const sectionTop = section.offsetTop;
-if (pageYOffset >= sectionTop - 150) {
-current = section.getAttribute('id');
-}
+if (pageYOffset >= sectionTop - 150) { current = section.getAttribute('id'); }
 });
 navLinks.forEach(a => {
 a.classList.remove('active');
-if (a.getAttribute('href').includes(current)) {
-a.classList.add('active');
-}
+if (a.getAttribute('href').includes(current)) { a.classList.add('active'); }
 });
 });
 
