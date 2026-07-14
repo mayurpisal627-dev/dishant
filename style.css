@@ -1,0 +1,425 @@
+@import url('https://googleapis.com');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    height: -webkit-fill-available;
+    background-color: #ededed;
+}
+
+body {
+    background-color: #ededed;
+    color: #111111;
+    font-family: 'Montserrat', sans-serif;
+    overflow-x: hidden;
+    position: relative;
+    min-height: 100vh;
+}
+
+/* ULTRA CLEAN GLASS NAV BAR */
+header {
+    background: rgba(237, 237, 237, 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 25px 60px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+header .logo {
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: #000;
+}
+
+nav a {
+    color: #666;
+    text-decoration: none;
+    margin-left: 35px;
+    font-weight: 700;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+}
+
+nav a:hover, nav a.active {
+    color: #e5a93b;
+}
+
+/* FORT VEGA WATERMARK HERO BACKGROUND LAYOUT */
+.hero-section {
+    min-height: calc(100vh - 85px);
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    padding: 60px;
+    background: #ededed;
+}
+
+.fort-vega-text-bg {
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 40px;
+    font-family: 'Playfair Display', serif;
+    font-size: 9.5rem;
+    font-weight: 700;
+    letter-spacing: -2px;
+    text-transform: uppercase;
+    color: rgba(0, 0, 0, 0.05);
+    z-index: 1;
+    pointer-events: none;
+    user-select: none;
+}
+
+.luxury-compass-element {
+    position: absolute;
+    bottom: -80px;
+    right: 15%;
+    width: 380px;
+    height: 380px;
+    z-index: 3;
+    pointer-events: none;
+    will-change: transform;
+}
+
+.luxury-compass-element img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 30px 60px rgba(0,0,0,0.15));
+}
+
+.hero-image-side {
+    width: 45%;
+    height: 80vh;
+    position: relative;
+    z-index: 2;
+    overflow: hidden;
+    border-radius: 4px;
+}
+
+.hero-image-side img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hero-text-side {
+    width: 45%;
+    padding-left: 80px;
+    z-index: 4;
+}
+
+.hero-text-side .sub-tag {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 5px;
+    color: #e5a93b;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+}
+
+.hero-text-side h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.4rem;
+    font-weight: 700;
+    line-height: 1.15;
+    color: #111;
+    margin-bottom: 25px;
+}
+
+.hero-text-side h1 span {
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    font-style: italic;
+    color: #555;
+}
+
+.hero-text-side p {
+    font-size: 14px;
+    line-height: 1.8;
+    color: #444;
+    max-width: 420px;
+    margin-bottom: 35px;
+}
+
+.liquid-container {
+    position: relative;
+    display: inline-block;
+    border-radius: 30px;
+    overflow: hidden;
+    background: #e5a93b;
+    border: 2px solid #e5a93b;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 1;
+}
+
+.liquid-container:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(229,169,59,0.3);
+    border-color: #000;
+}
+
+.liquid-btn {
+    position: relative;
+    padding: 16px 36px;
+    background: transparent;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    z-index: 5;
+}
+
+.liquid-bg {
+    position: absolute;
+    top: -40%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: #000;
+    border-radius: 42%;
+    z-index: 2;
+    animation: spinLiquid 6s linear infinite;
+}
+
+@keyframes spinLiquid {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 100px 40px;
+}
+
+.section-title {
+    font-family: 'Playfair Display', serif;
+    text-align: center;
+    font-size: 2.6rem;
+    font-weight: 700;
+    margin-bottom: 60px;
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    width: 40px;
+    height: 2px;
+    background: #e5a93b;
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 35px;
+}
+
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    background: #e0e0e0;
+    border-radius: 4px;
+    cursor: pointer;
+    height: 460px;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gallery-item:hover img {
+    transform: scale(1.03);
+}
+
+.services-section {
+    background-color: #ededed; 
+    padding: 100px 40px;
+}
+
+.services-grid {
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); 
+    gap: 30px; 
+    max-width: 1200px; 
+    margin: 0 auto;
+}
+
+.services-section .service-card {
+    background: #f5f5f5; 
+    border: 1px solid rgba(0,0,0,0.03); 
+    padding: 45px 30px; 
+    border-radius: 4px; 
+    text-align: center;
+    transition: all 0.4s ease;
+}
+
+.services-section .service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.03);
+    border-color: #e5a93b !important;
+}
+
+.services-section .service-card div {
+    font-size: 2.2rem; 
+    color: #e5a93b; 
+    margin-bottom: 15px;
+}
+
+.services-section .service-card h3 {
+    font-size: 13px; 
+    font-weight: 700; 
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.contact-section {
+    background-color: #ececec;
+    border-top: 1px solid rgba(0,0,0,0.04);
+    padding: 100px 40px;
+    text-align: center;
+}
+
+.contact-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background: #f5f5f5;
+    padding: 45px;
+    border-radius: 4px;
+    border: 1px solid rgba(0,0,0,0.03);
+}
+
+.contact-details {
+    text-align: left;
+    display: inline-block;
+    width: 100%;
+    max-width: 400px;
+}
+
+.contact-item {
+    margin-bottom: 20px;
+    font-size: 14px;
+    color: #333;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.contact-item strong {
+    color: #000;
+    text-transform: uppercase;
+    font-size: 11px;
+    display: inline-block;
+    width: 120px;
+    letter-spacing: 1px;
+}
+
+.contact-item a {
+    color: #e5a93b;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+.contact-item a:hover {
+    color: #000;
+}
+
+.lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(237,237,237,0.98);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.lightbox img {
+    max-width: 90%;
+    max-height: 85%;
+    object-fit: contain;
+    border-radius: 2px;
+    box-shadow: 0 40px 90px rgba(0,0,0,0.08);
+}
+
+.close-box {
+    position: absolute;
+    top: 35px;
+    right: 40px;
+    color: #000;
+    font-size: 45px;
+    cursor: pointer;
+    font-weight: 100;
+    transition: 0.3s;
+    line-height: 1;
+}
+
+.close-box:hover {
+    color: #e5a93b;
+    transform: rotate(90deg);
+}
+
+footer {
+    text-align: center;
+    padding: 45px 20px;
+    background: #ededed;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: #777;
+    border-top: 1px solid rgba(0,0,0,0.04);
+    text-transform: uppercase;
+}
+
+@media (max-width: 768px) {
+    header { padding: 20px; flex-direction: column; gap: 15px; }
+    nav a { margin: 0 10px; font-size: 10px; }
+    .hero-section { min-height: auto; flex-direction: column; padding: 40px 20px; }
+    .fort-vega-text-bg { font-size: 3.5rem; top: 5%; padding: 0 10px; }
+    .hero-image-side { width: 100%; height: 40vh; }
+    .hero-text-side { width: 100%; padding-left: 0; margin-top: 40px; text-align: center; }
+    .hero-text-side h1 { font-size: 2.4rem; }
+    .hero-text-side p { margin: 0 auto 30px auto; }
+    .luxury-compass-element { width: 220px; height: 220px; right: 5%; bottom: -40px; }
+    .gallery-grid, .services-grid { grid-template-columns: 1fr; }
+    .gallery-item { height: 360px; }
+    .contact-item { flex-direction: column; text-align: center; gap: 5px; }
+    .contact-item strong { width: 100%; }
+    .contact-details { text-align: center; }
+}
