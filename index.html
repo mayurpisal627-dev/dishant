@@ -1,152 +1,651 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
-    <title>Dishant Mote Portfolio</title>
-    
-    <!-- External stylesheets safely attached to ensure luxury render loops -->
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="intro.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+<title>Dishant Mote Portfolio</title>
+
+<style>
+@import url('https://googleapis.com');
+
+* {
+box-sizing: border-box;
+margin: 0;
+padding: 0;
+}
+
+html {
+scroll-behavior: smooth;
+height: -webkit-fill-available;
+background-color: #ededed;
+}
+
+body {
+background-color: #ededed;
+color: #000000;
+font-family: 'Montserrat', sans-serif;
+overflow-x: hidden;
+position: relative;
+min-height: 100vh;
+}
+
+/* PREMIUM INTRO GATE SCREEN */
+.luxury-gate-shutter {
+position: fixed;
+top: 0;
+left: 0;
+width: 100vw;
+height: 100vh;
+z-index: 99999;
+display: flex;
+pointer-events: none;
+}
+
+.shutter-wing {
+width: 50.5%;
+height: 100%;
+background: #090909;
+position: absolute;
+top: 0;
+pointer-events: auto;
+transition: transform 1.3s cubic-bezier(0.85, 0, 0.15, 1);
+box-shadow: 0 0 80px rgba(0,0,0,0.9);
+}
+
+.shutter-left { left: 0; }
+.shutter-right { right: 0; }
+
+.luxury-gate-shutter.open .shutter-left { transform: translateX(-100%); }
+.luxury-gate-shutter.open .shutter-right { transform: translateX(100%); }
+
+/* ULTRA LUXURY GLASS NAV BAR */
+header {
+background: rgba(237, 237, 237, 0.85);
+backdrop-filter: blur(20px);
+-webkit-backdrop-filter: blur(20px);
+padding: 20px 40px;
+position: sticky;
+top: 0;
+z-index: 100;
+display: flex;
+justify-content: space-between;
+align-items: center;
+border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+header .logo {
+font-weight: 800;
+font-size: 1.1rem;
+letter-spacing: 4px;
+text-transform: uppercase;
+color: #000000;
+}
+
+nav {
+display: flex;
+align-items: center;
+}
+
+nav a {
+color: #333333;
+text-decoration: none;
+margin-left: 25px;
+font-weight: 700;
+font-size: 11px;
+letter-spacing: 2px;
+text-transform: uppercase;
+transition: color 0.3s ease;
+}
+
+nav a:hover, nav a.active {
+color: #e5a93b;
+}
+</style>
 </head>
+
+<style>
+/* AUTO-ADJUST DYNAMIC HERO SECTION */
+.hero-section {
+min-height: calc(100vh - 80px);
+width: 100%;
+max-width: 1400px;
+margin: 0 auto;
+position: relative;
+display: flex;
+align-items: center;
+justify-content: space-between;
+padding: 40px;
+overflow: hidden;
+background: #ededed;
+}
+
+.fort-vega-text-bg {
+position: absolute;
+top: 8%;
+left: 50%;
+transform: translateX(-50%);
+width: 100%;
+display: flex;
+justify-content: space-between;
+padding: 0 40px;
+font-family: 'Playfair Display', serif;
+font-size: 9.5rem;
+font-weight: 800;
+letter-spacing: -2px;
+text-transform: uppercase;
+color: rgba(0, 0, 0, 0.035);
+z-index: 1;
+pointer-events: none;
+user-select: none;
+}
+
+/* FIXED STATIONARY CAMERA - LIGHT BLUR */
+.luxury-compass-element {
+position: absolute;
+bottom: -50px;
+right: 0%;
+width: 580px;
+height: 580px;
+z-index: 1;
+pointer-events: none;
+mix-blend-mode: multiply;
+filter: blur(3px) contrast(1.05) brightness(1.0);
+opacity: 0.9;
+transform: none !important;
+}
+
+.luxury-compass-element img {
+width: 100%;
+height: 100%;
+object-fit: contain;
+}
+
+.hero-image-side {
+width: 46%;
+height: 72vh;
+position: relative;
+z-index: 2;
+overflow: hidden;
+border-radius: 8px;
+box-shadow: 0 25px 60px rgba(0,0,0,0.08);
+}
+
+.hero-image-side img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+}
+
+/* SUPER DARK JET BLACK HERO TEXT */
+.hero-text-side {
+width: 48%;
+padding-left: 40px;
+z-index: 3;
+position: relative;
+}
+
+.hero-text-side .sub-tag {
+font-size: 11px;
+font-weight: 800;
+letter-spacing: 5px;
+color: #e5a93b;
+text-transform: uppercase;
+margin-bottom: 15px;
+}
+
+.hero-text-side h1 {
+font-family: 'Playfair Display', serif;
+font-size: 4rem;
+font-weight: 800;
+line-height: 1.15;
+color: #000000;
+margin-bottom: 25px;
+letter-spacing: -1px;
+}
+
+.hero-text-side h1 span {
+font-family: 'Playfair Display', serif;
+font-weight: 400;
+font-style: italic;
+color: #222222;
+}
+
+.hero-text-side p {
+font-size: 15px;
+line-height: 1.8;
+color: #111111;
+max-width: 460px;
+margin-bottom: 35px;
+font-weight: 600;
+}
+
+/* LUXURY LIQUID ACCENT BUTTONS */
+.liquid-container {
+position: relative;
+display: inline-block;
+border-radius: 30px;
+overflow: hidden;
+background: #e5a93b;
+border: 2px solid #e5a93b;
+cursor: pointer;
+transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+z-index: 10;
+}
+
+.liquid-container:hover {
+transform: translateY(-4px);
+box-shadow: 0 15px 30px rgba(229,169,59,0.4);
+border-color: #000000;
+}
+
+.liquid-btn {
+position: relative;
+padding: 16px 38px;
+background: transparent;
+color: #ffffff;
+font-family: 'Montserrat', sans-serif;
+font-size: 11px;
+font-weight: 700;
+border: none;
+cursor: pointer;
+letter-spacing: 2px;
+text-transform: uppercase;
+z-index: 12;
+}
+
+.liquid-bg {
+position: absolute;
+top: -40%;
+left: -50%;
+width: 200%;
+height: 200%;
+background: #000000;
+border-radius: 42%;
+z-index: 5;
+animation: spinLiquid 6s linear infinite;
+}
+
+@keyframes spinLiquid {
+0% { transform: rotate(0deg); }
+100% { transform: rotate(360deg); }
+}
+</style>
+</head>
+
+<style>
+/* GRID COMPONENTS AUTOMATED SETUP */
+.container {
+max-width: 1240px;
+margin: 0 auto;
+padding: 100px 40px;
+}
+
+.section-title {
+font-family: 'Playfair Display', serif;
+text-align: center;
+font-size: 2.8rem;
+font-weight: 800;
+margin-bottom: 60px;
+position: relative;
+}
+
+.section-title::after {
+content: '';
+width: 45px;
+height: 2px;
+background: #e5a93b;
+position: absolute;
+bottom: -15px;
+left: 50%;
+transform: translateX(-50%);
+}
+
+.gallery-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+gap: 35px;
+}
+
+.gallery-item {
+position: relative;
+overflow: hidden;
+background: #e0e0e0;
+border-radius: 6px;
+cursor: pointer;
+height: 480px;
+box-shadow: 0 15px 45px rgba(0,0,0,0.03);
+}
+
+.gallery-item img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gallery-item:hover img {
+transform: scale(1.04);
+}
+
+.services-section {
+background-color: #ededed;
+padding: 100px 40px;
+}
+
+.services-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+gap: 30px;
+max-width: 1240px;
+margin: 0 auto;
+}
+
+.services-section .service-card {
+background: #f5f5f5;
+border: 1px solid rgba(0,0,0,0.02);
+padding: 50px 35px;
+border-radius: 6px;
+text-align: center;
+transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+box-shadow: 0 10px 30px rgba(0,0,0,0.01);
+}
+
+.services-section .service-card:hover {
+transform: translateY(-6px);
+box-shadow: 0 25px 50px rgba(0,0,0,0.04);
+border-color: #e5a93b !important;
+}
+
+.services-section .service-card div {
+font-size: 2.4rem;
+color: #e5a93b;
+margin-bottom: 18px;
+}
+
+.services-section .service-card h3 {
+font-size: 14px;
+font-weight: 700;
+text-transform: uppercase;
+letter-spacing: 1px;
+}
+
+.contact-section {
+background-color: #ececec;
+border-top: 1px solid rgba(0,0,0,0.03);
+padding: 100px 40px;
+text-align: center;
+}
+
+.contact-container {
+max-width: 640px;
+margin: 0 auto;
+background: #f5f5f5;
+padding: 50px;
+border-radius: 6px;
+border: 1px solid rgba(0,0,0,0.02);
+box-shadow: 0 15px 40px rgba(0,0,0,0.01);
+}
+
+.contact-details {
+text-align: left;
+display: inline-block;
+width: 100%;
+max-width: 420px;
+}
+
+.contact-item {
+margin-bottom: 22px;
+font-size: 15px;
+color: #111111;
+display: flex;
+align-items: center;
+flex-wrap: wrap;
+}
+
+.contact-item strong {
+color: #000000;
+text-transform: uppercase;
+font-size: 11px;
+display: inline-block;
+width: 130px;
+letter-spacing: 1px;
+}
+
+.contact-item a {
+color: #e5a93b;
+text-decoration: none;
+font-weight: 700;
+transition: color 0.3s;
+}
+
+.contact-item a:hover {
+color: #000000;
+}
+
+.lightbox {
+display: none;
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(237,237,237,0.98);
+z-index: 1000;
+justify-content: center;
+align-items: center;
+}
+
+.lightbox img {
+max-width: 90%;
+max-height: 85%;
+object-fit: contain;
+border-radius: 4px;
+box-shadow: 0 45px 100px rgba(0,0,0,0.08);
+}
+
+.close-box {
+position: absolute;
+top: 35px;
+right: 40px;
+color: #000000;
+font-size: 45px;
+cursor: pointer;
+font-weight: 100;
+transition: 0.3s;
+line-height: 1;
+}
+
+.close-box:hover {
+color: #e5a93b;
+transform: rotate(90deg);
+}
+
+footer {
+text-align: center;
+padding: 50px 20px;
+background: #ededed;
+font-size: 10px;
+letter-spacing: 2px;
+color: #555555;
+border-top: 1px solid rgba(0,0,0,0.04);
+text-transform: uppercase;
+}
+
+/* RESPONSIVE MEDIA QUERIES FOR PC, TABLETS & MOBILE AUTO-ADJUST */
+@media (max-width: 1200px) {
+.fort-vega-text-bg { font-size: 8rem; top: 10%; }
+.hero-text-side h1 { font-size: 3.4rem; }
+.luxury-compass-element { width: 500px; height: 500px; }
+}
+
+@media (max-width: 992px) {
+.hero-section { padding: 30px; }
+.fort-vega-text-bg { font-size: 6.5rem; }
+.hero-text-side { padding-left: 25px; }
+.hero-text-side h1 { font-size: 2.8rem; }
+.luxury-compass-element { width: 440px; height: 440px; bottom: -30px; }
+}
+
+@media (max-width: 768px) {
+header { padding: 20px; flex-direction: column; gap: 15px; text-align: center; }
+nav a { margin: 0 10px; font-size: 10px; }
+.hero-section { flex-direction: column; padding: 30px 20px; min-height: auto; }
+.fort-vega-text-bg { font-size: 3.8rem; top: 3%; padding: 0 15px; }
+.hero-image-side { width: 100%; height: 48vh; }
+.hero-text-side { width: 100%; padding-left: 0; margin-top: 40px; text-align: center; display: flex; flex-direction: column; align-items: center; }
+.hero-text-side h1 { font-size: 2.5rem; margin-bottom: 20px; }
+.hero-text-side p { margin: 0 auto 25px auto; }
+.luxury-compass-element { width: 320px; height: 320px; bottom: -40px; right: 5%; opacity: 0.6; }
+.gallery-grid, .services-grid { grid-template-columns: 1fr; }
+.gallery-item { height: 380px; }
+.contact-item { flex-direction: column; text-align: center; gap: 6px; }
+.contact-item strong { width: 100%; }
+.contact-details { text-align: center; }
+}
+</style>
+</head>
+
 <body>
 
-    <!-- LUXURY MINIMALIST LOADING OVERLAY SHUTTER -->
-    <div class="luxury-gate-shutter" id="luxuryIntro">
-        <div class="shutter-wing shutter-left"></div>
-        <div class="shutter-wing shutter-right"></div>
-    </div>
+<div class="luxury-gate-shutter" id="luxuryIntro">
+<div class="shutter-wing shutter-left"></div>
+<div class="shutter-wing shutter-right"></div>
+</div>
 
-    <header>
-        <div class="logo">DISHANT MOTE</div>
-        <nav>
-            <a href="#home" class="active">Home</a>
-            <a href="#portfolio">Portfolio</a>
-            <a href="#services">Services</a>
-            <a href="#contact">Contacts</a>
-        </nav>
-    </header>
+<header>
+<div class="logo">DISHANT MOTE</div>
+<nav>
+<a href="#home" class="active">Home</a>
+<a href="#portfolio">Portfolio</a>
+<a href="#services">Services</a>
+<a href="#contact">Contacts</a>
+</nav>
+</header>
 
-    <section id="home" class="hero-section">
-        <!-- Fort Vega style blur background camera setup (No longer rotates) -->
-        <div class="luxury-compass-element">
-            <img src="camera.jpg" alt="Luxury Stationary Blun Blur Anchor">
-        </div>
+<section id="home" class="hero-section">
+<div class="fort-vega-text-bg">
+<div>DISHANT</div>
+<div>MOTE</div>
+</div>
 
-        <!-- Giant Bold Background Watermark text layer -->
-        <div class="fort-vega-text-bg">
-            <div>DISHANT</div>
-            <div>MOTE</div>
-        </div>
+<div class="hero-image-side">
+<img src="dishant.jpg" alt="Dishant Mote Portfolio">
+</div>
 
-        <div class="hero-image-side">
-            <img src="dishant.jpg" alt="Dishant Mote Portfolio">
-        </div>
+<div class="hero-text-side">
+<p class="sub-tag">I'm Dishant Mote</p>
+<h1>Photographer<br><span>& Visual Artist</span></h1>
+<p>Based in India, I specialize in professional portraits, high-end commercial editorial layouts, and outdoor lifestyle photography campaigns.</p>
 
-        <div class="hero-text-side">
-            <p class="sub-tag">I'm Dishant Mote</p>
-            <h1>Photographer<br><span>& Visual Artist</span></h1>
-            <p>Based in India, I specialize in professional portraits, high-end commercial editorial layouts, and outdoor lifestyle photography campaigns.</p>
-            <div class="liquid-container">
-                <div class="liquid-bg"></div>
-                <button class="liquid-btn" onclick="document.getElementById('portfolio').scrollIntoView();">View Portfolio</button>
-            </div>
-        </div>
-    </section>
+<div class="liquid-container">
+<div class="liquid-bg"></div>
+<button class="liquid-btn" onclick="document.getElementById('portfolio').scrollIntoView();">View Portfolio</button>
+</div>
+</div>
 
-    <div class="container" id="portfolio">
-        <h2 class="section-title">Portfolio</h2>
-        <div class="gallery-grid">
-            <div class="gallery-item" onclick="openLightbox(this)"><img src="1.jpg" alt="Photo 1"></div>
-            <div class="gallery-item" onclick="openLightbox(this)"><img src="2.jpg" alt="Photo 2"></div>
-            <div class="gallery-item" onclick="openLightbox(this)"><img src="3.jpg" alt="Photo 3"></div>
-            <div class="gallery-item" onclick="openLightbox(this)"><img src="4.jpg" alt="Photo 4"></div>
-            <div class="gallery-item" onclick="openLightbox(this)"><img src="5.jpg" alt="Photo 5"></div>
-            <div class="gallery-item" onclick="openLightbox(this)"><img src="6.jpg" alt="Photo 6"></div>
-        </div>
-    </div>
+<div class="luxury-compass-element">
+<img src="camera.jpg" alt="Stationary Luxury Shutter Base Asset">
+</div>
+</section>
 
-    <section id="services" class="services-section">
-        <h2 class="section-title">My Services</h2>
-        <div class="services-grid">
-            <div class="service-card"><div>📷</div> &nbsp; <h3>Photography</h3></div>
-            <div class="service-card"><div>📹</div> &nbsp; <h3>Videography</h3></div>
-            <div class="service-card"><div>🎬</div> &nbsp; <h3>Cinematic Reels</h3></div>
-            <div class="service-card"><div>✨</div> &nbsp; <h3>Candid Shoot</h3></div>
-            <div class="service-card"><div>🧸</div> &nbsp; <h3>Baby Shoot</h3></div>
-            <div class="service-card"><div>🤰</div> &nbsp; <h3>Maternity Shoot</h3></div>
-            <div class="service-card"><div>💍</div> &nbsp; <h3>Pre-Wedding</h3></div>
-        </div>
-    </section>
+<div class="container" id="portfolio">
+<h2 class="section-title">Portfolio</h2>
+<div class="gallery-grid">
+<div class="gallery-item" onclick="openLightbox(this)"><img src="1.jpg" alt="Photo 1"></div>
+<div class="gallery-item" onclick="openLightbox(this)"><img src="2.jpg" alt="Photo 2"></div>
+<div class="gallery-item" onclick="openLightbox(this)"><img src="3.jpg" alt="Photo 3"></div>
+<div class="gallery-item" onclick="openLightbox(this)"><img src="4.jpg" alt="Photo 4"></div>
+<div class="gallery-item" onclick="openLightbox(this)"><img src="5.jpg" alt="Photo 5"></div>
+<div class="gallery-item" onclick="openLightbox(this)"><img src="6.jpg" alt="Photo 6"></div>
+</div>
+</div>
 
-    <section id="contact" class="contact-section">
-        <h2 class="section-title">Contact Me</h2>
-        <div class="contact-container">
-            <div class="contact-details">
-                <div class="contact-item"><strong>Name:</strong> Dishant Mote</div>
-                <div class="contact-item"><strong>Instagram:</strong><a href="https://instagram.com" target="_blank">@dishant_mote_photography</a></div>
-                <div class="contact-item"><strong>Contact:</strong><a href="tel:+919309405055">+91 9309405055</a></div>
-                <div class="contact-item"><strong>Email:</strong><a href="mailto:motedishant93@gmail.com">motedishant93@gmail.com</a></div>
-            </div>
-        </div>
-    </section>
+<section id="services" class="services-section">
+<h2 class="section-title">My Services</h2>
+<div class="services-grid">
+<div class="service-card"><div>📷</div>   <h3>Photography</h3></div>
+<div class="service-card"><div>📹</div>   <h3>Videography</h3></div>
+<div class="service-card"><div>🎬</div>   <h3>Cinematic Reels</h3></div>
+<div class="service-card"><div>✨</div>   <h3>Candid Shoot</h3></div>
+<div class="service-card"><div>🧸</div>   <h3>Baby Shoot</h3></div>
+<div class="service-card"><div>🤰</div>   <h3>Maternity Shoot</h3></div>
+<div class="service-card"><div>💍</div>   <h3>Pre-Wedding</h3></div>
+</div>
+</section>
 
-    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
-        <span class="close-box">×</span>
-        <img id="lightbox-img" src="" alt="Popup Frame">
-    </div>
+<section id="contact" class="contact-section">
+<h2 class="section-title">Contact Me</h2>
+<div class="contact-container">
+<div class="contact-details">
+<div class="contact-item"><strong>Name:</strong> Dishant Mote</div>
+<div class="contact-item"><strong>Instagram:</strong><a href="https://instagram.com" target="_blank">@dishant_mote_photography</a></div>
+<div class="contact-item"><strong>Contact:</strong><a href="tel:+919309405055">+91 9309405055</a></div>
+<div class="contact-item"><strong>Email:</strong><a href="mailto:motedishant93@gmail.com">motedishant93@gmail.com</a></div>
+</div>
+</div>
+</section>
 
-    <footer><p>© 2026 Dishant Mote Photography Studio. All Rights Reserved.</p></footer>
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+<span class="close-box">×</span>
+<img id="lightbox-img" src="" alt="Popup Frame">
+</div>
 
-    <script>
-        const lightbox = document.getElementById('lightbox');
-        const lightboxImg = document.getElementById('lightbox-img');
+<footer><p>© 2026 Dishant Mote Photography Studio. All Rights Reserved.</p></footer>
 
-        function openLightbox(el) {
-            lightboxImg.src = el.querySelector('img').src;
-            lightbox.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-        }
+<script>
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
 
-        function closeLightbox() {
-            lightbox.style.display = 'none';
-            lightboxImg.src = '';
-            document.body.style.overflow = 'auto';
-        }
+// Lightbox trigger functionality
+function openLightbox(el) {
+lightboxImg.src = el.querySelector('img').src;
+lightbox.style.display = 'flex';
+document.body.style.overflow = 'hidden';
+}
 
-        window.addEventListener('scroll', () => {
-            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            const sections = document.querySelectorAll('section, div.container, #contact');
-            const navLinks = document.querySelectorAll('nav a');
-            let current = '';
-            
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                if (scrollTop >= sectionTop - 150) { current = section.getAttribute('id'); }
-            });
-            
-            navLinks.forEach(a => {
-                a.classList.remove('active');
-                if (a.getAttribute('href').includes(current)) { a.classList.add('active'); }
-            });
-        });
+function closeLightbox() {
+lightbox.style.display = 'none';
+lightboxImg.src = '';
+document.body.style.overflow = 'auto';
+}
 
-        // Trigger opening shutter intro effect
-        window.addEventListener('DOMContentLoaded', () => {
-            document.body.style.overflow = 'hidden';
-            setTimeout(() => {
-                const intro = document.getElementById('luxuryIntro');
-                intro.classList.add('open');
-                setTimeout(() => {
-                    intro.remove();
-                    document.body.style.overflow = 'auto';
-                }, 1500);
-            }, 800);
-        });
+window.addEventListener('scroll', () => {
+let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+const sections = document.querySelectorAll('section, div.container, #contact');
+const navLinks = document.querySelectorAll('nav a');
+let current = '';
 
-        document.addEventListener('touchstart', function (e) {
-            if (e.touches.length > 1) { e.preventDefault(); }
-        }, { passive: false });
-    </script>
+sections.forEach(section => {
+const sectionTop = section.offsetTop;
+if (scrollTop >= sectionTop - 150) { current = section.getAttribute('id'); }
+});
+
+navLinks.forEach(a => {
+a.classList.remove('active');
+if (a.getAttribute('href').includes(current)) { a.classList.add('active'); }
+});
+});
+
+// Trigger opening shutter intro effect smoothly
+window.addEventListener('DOMContentLoaded', () => {
+document.body.style.overflow = 'hidden';
+setTimeout(() => {
+const intro = document.getElementById('luxuryIntro');
+intro.classList.add('open');
+setTimeout(() => {
+intro.remove();
+document.body.style.overflow = 'auto';
+}, 1400);
+}, 700);
+});
+
+document.addEventListener('touchstart', function (e) {
+if (e.touches.length > 1) { e.preventDefault(); }
+}, { passive: false });
+</script>
 </body>
 </html>
+
+
